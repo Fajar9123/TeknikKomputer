@@ -1,18 +1,7 @@
 <?php
-$servername = "localhost"; // Your server name or IP address
-$username = "root"; // Database username
-$password = ""; // Database password
-$dbname = "multi_user"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Sertakan file koneksi
+include 'koneksidaftar.php';
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -213,116 +202,113 @@ if ($conn->connect_error) {
           <p>Pada bagian ini, cantumkan data pribadi, data pendidikan formal serta data pekerjaan anda pada saat ini.
           </p>
 
-          <form id="form-step1">
-            <h5>a. Data Pribadi</h5>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="full-name">Nama Lengkap</label>
-                <input type="text" class="form-control" id="full-name" placeholder="Masukkan Nama Lengkap" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="id-number">No. KTP/NIK/Paspor</label>
-                <input type="text" class="form-control" id="id-number" placeholder="Masukkan No. KTP/NIK/Paspor"
-                  required>
-              </div>
-            </div>
+         <form id="form-step1" method="POST" action="koneksidaftar.php">
+    <h5>a. Data Pribadi</h5>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="full-name">Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" class="form-control" id="full-name" placeholder="Masukkan Nama Lengkap" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="id-number">No. KTP/NIK/Paspor</label>
+            <input type="text" name="no_ktp_nik_paspor" class="form-control" id="id-number" placeholder="Masukkan No. KTP/NIK/Paspor" required>
+        </div>
+    </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="birth-place">Tempat Lahir</label>
-                <input type="text" class="form-control" id="birth-place" placeholder="Masukkan Tempat Lahir" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="birth-date">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="birth-date" placeholder="Masukkan Tempat Lahir" required>
-              </div>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="birth-place">Tempat Lahir</label>
+            <input type="text" name="tempat_lahir" class="form-control" id="birth-place" placeholder="Masukkan Tempat Lahir" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="birth-date">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir" class="form-control" id="birth-date" required>
+        </div>
+    </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="gender">Jenis Kelamin</label>
-                <select id="gender" class="form-control" required>
-                  <option selected disabled>Pilih...</option>
-                  <option>Laki-laki</option>
-                  <option>Perempuan</option>
-                </select>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="nationality">Kebangsaan</label>
-                <select id="nationality" class="form-control" required>
-                  <option selected disabled>Pilih...</option>
-                  <option>WNI</option>
-                  <option>WNA</option>
-                  <option>Lainnya</option>
-                </select>
-              </div>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="gender">Jenis Kelamin</label>
+            <select name="jenis_kelamin" id="gender" class="form-control" required>
+                <option selected disabled>Pilih...</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="nationality">Kebangsaan</label>
+            <select name="kebangsaan" id="nationality" class="form-control" required>
+                <option selected disabled>Pilih...</option>
+                <option value="WNI">WNI</option>
+                <option value="WNA">WNA</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+        </div>
+    </div>
 
-            <div class="form-group">
-              <label for="address">Alamat Rumah</label>
-              <textarea class="form-control" id="address" placeholder="Masukkan Alamat Rumah" required></textarea>
-            </div>
+    <div class="form-group">
+        <label for="address">Alamat Rumah</label>
+        <textarea name="alamat_rumah" class="form-control" id="address" placeholder="Masukkan Alamat Rumah" required></textarea>
+    </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="phone">No. Telepon</label>
-                <input type="tel" class="form-control" id="phone" placeholder="Masukkan No. Telepon" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" required>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="education">Kualifikasi Pendidikan</label>
-              <input type="text" class="form-control" id="education" placeholder="Masukkan Kualifikasi Pendidikan"
-                required>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="phone">No. Telepon</label>
+            <input type="tel" name="no_telepon" class="form-control" id="phone" placeholder="Masukkan No. Telepon" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email" required>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="education">Kualifikasi Pendidikan</label>
+        <input type="text" name="kualifikasi_pendidikan" class="form-control" id="education" placeholder="Masukkan Kualifikasi Pendidikan" required>
+    </div>
 
-            <h5 class="mt-5">b. Data Pekerjaan Sekarang</h5>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="company">Nama Institusi / Perusahaan</label>
-                <input type="text" class="form-control" id="company" placeholder="Masukkan Nama Institusi / Perusahaan"
-                  required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="position">Jabatan</label>
-                <input type="text" class="form-control" id="position" placeholder="Masukkan Jabatan" required>
-              </div>
-            </div>
+    <h5 class="mt-5">b. Data Pekerjaan Sekarang</h5>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="company">Nama Institusi / Perusahaan</label>
+            <input type="text" name="nama_institusi" class="form-control" id="company" placeholder="Masukkan Nama Institusi / Perusahaan" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="position">Jabatan</label>
+            <input type="text" name="jabatan" class="form-control" id="position" placeholder="Masukkan Jabatan" required>
+        </div>
+    </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="office-address">Alamat Kantor</label>
-                <textarea class="form-control" id="office-address" placeholder="Masukkan Alamat Kantor"
-                  required></textarea>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="office-zip">Kode Pos</label>
-                <input type="text" class="form-control" id="office-zip" placeholder="Masukkan Kode Pos" required>
-              </div>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="office-address">Alamat Kantor</label>
+            <textarea name="alamat_kantor" class="form-control" id="office-address" placeholder="Masukkan Alamat Kantor" required></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="office-zip">Kode Pos</label>
+            <input type="text" name="kode_pos12" class="form-control" id="office-zip" placeholder="Masukkan Kode Pos" required>
+        </div>
+    </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-5">
-                <label for="office-email">Email</label>
-                <input type="email" class="form-control" id="office-email" placeholder="Masukkan Email" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="office-telepon">No. Telepon</label>
-                <input type="tel" class="form-control" id="office-telepon" placeholder="Masukkan No. Telepon" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="office-fax">Fax</label>
-                <input type="tel" class="form-control" id="office-fax" placeholder="Masukkan Fax " required>
-              </div>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label for="office-email">Email</label>
+            <input type="email" name="email_kantor" class="form-control" id="office-email" placeholder="Masukkan Email" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="office-telepon">No. Telepon</label>
+            <input type="tel" name="no_telepon" class="form-control" id="office-telepon" placeholder="Masukkan No. Telepon" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="office-fax">Fax</label>
+            <input type="tel" name="fax_kantor" class="form-control" id="office-fax" placeholder="Masukkan Fax" required>
+        </div>
+    </div>
 
-            <p class="text-muted">* Pastikan semua informasi yang diisi adalah benar.</p>
-            <button type="button" class="btn-primary my-5" onclick="loadNextForm()">Selanjutnya</button>
-          </form>
+    <p class="text-muted">* Pastikan semua informasi yang diisi adalah benar.</p>
+    <button type="submit" class="btn-primary my-5">Selanjutnya</button>
+</form>
+
         </div>
       </main>
 
@@ -587,12 +573,6 @@ if ($conn->connect_error) {
 </html>
 </main>
 </body>
-<script>
-  document.getElementById('form-step1').addEventListener('submit', function (event) {
-    event.preventDefault();
-    window.location.href = 'p02.html'; // Ganti ke halaman p02.html
-  });
-</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

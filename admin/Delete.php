@@ -1,34 +1,45 @@
 <?php
-include "koneksi.php";
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Include the database connection file
+include '../koneksidaftar.php'; // Adjust the path if necessary
 
-$id = $_GET['id'];
+// Check if the connection is successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
-// Ambil nama file foto terkait buku
-$querySelectFoto = "SELECT thumbnail FROM product WHERE id = '$id'";
-$resultSelectFoto = mysqli_query($conn, $querySelectFoto);
-$rowSelectFoto = mysqli_fetch_assoc($resultSelectFoto);
-$thumbnail = $rowSelectFoto['thumbnail'];
+// Check if the ID is set in the URL
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-// Hapus file foto jika ada
-if (!empty($thumbnail)) {
-    $path_to_file = 'img/' . $thumbnail;
-    if (file_exists($path_to_file)) {
-        unlink($path_to_file); // Hapus file foto dari direktori
+    // Prepare a delete statement
+    $sql = "DELETE FROM peserta WHERE id = ?";
+    
+    // Create a prepared statement
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        // Bind the ID parameter to the statement
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        
+        // Execute the statement
+        if (mysqli_stmt_execute($stmt)) {
+            // Redirect back to peserta.php with a success message
+            header("Location: admin/peserta.php?message=Data berhasil dihapus");
+            exit();
+        } else {
+            // Handle error
+            echo "Error: Could not execute $sql. " . mysqli_error($conn);
+        }
+    } else {
+        echo "Error preparing statement: " . mysqli_error($conn);
     }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
 }
 
-// Hapus entri buku dari database
-$sql = mysqli_query($conn, "DELETE FROM product WHERE id = '$id'");
-
-if ($sql) {
-    echo "<script>
-        alert('Delete Product Success!');
-        window.location.href='tables.php';
-      </script>";
-} else {
-    echo "<script>
-                alert('Delete Product Failed!');
-                window.location.href='tables.php';
-              </script>";
-}
+// Close the database connection
+mysqli_close($conn);
+?>
