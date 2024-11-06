@@ -185,72 +185,85 @@ $result = mysqli_query($db, $query);
             </nav>
         </div>
 
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">Data Peserta - FR.APL.02. ASESMEN MANDIRI</h1>
-                    <div class="section-title">Skema Sertifikasi: PEMELIHARAAN DAN PERBAIKAN KOMPUTER</div>
-                    <p><strong>Nomor Judul:</strong> SKM/0382/00010/3/2019</p>
-                    <div class="mb-4"></div>
+       <div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Data Peserta - FR.APL.02. ASESMEN MANDIRI</h1>
+            <div class="section-title">Skema Sertifikasi: PEMELIHARAAN DAN PERBAIKAN KOMPUTER</div>
+            <p><strong>Nomor Judul:</strong> SKM/0382/00010/3/2019</p>
+            <div class="mb-4"></div>
 
-                    <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>No.</th>
-            <th>Nama Lengkap</th>
-            <th>No. KTP/NIK/Paspor</th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Jenis Kelamin</th>
-            <th>Kebangsaan</th>
-            <th>Alamat Rumah</th>
-            <th>Email</th>
-            <th>Kualifikasi Pendidikan</th>
-            <th>Nama Institusi</th>
-            <th>Jabatan</th>
-            <th>Alamat Kantor</th>
-            <th>Kode Pos</th>
-            <th>Email Kantor</th>
-            <th>Fax Kantor</th>
-            <th>Aksi</th> <!-- New Aksi Column -->
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (mysqli_num_rows($result) > 0) {
-            $no = 1;
-            while ($row = mysqli_fetch_assoc($result)) { ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo htmlspecialchars($row['nama_lengkap']); ?></td>
-                    <td><?php echo htmlspecialchars($row['no_ktp_nik_paspor']); ?></td>
-                    <td><?php echo htmlspecialchars($row['tempat_lahir']); ?></td>
-                    <td><?php echo htmlspecialchars($row['tanggal_lahir']); ?></td>
-                    <td><?php echo htmlspecialchars($row['jenis_kelamin']); ?></td>
-                    <td><?php echo htmlspecialchars($row['kebangsaan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['alamat_rumah']); ?></td>
-                    <td><?php echo htmlspecialchars($row['email']); ?></td>
-                    <td><?php echo htmlspecialchars($row['kualifikasi_pendidikan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['nama_institusi']); ?></td>
-                    <td><?php echo htmlspecialchars($row['jabatan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['alamat_kantor']); ?></td>
-                    <td><?php echo htmlspecialchars($row['kode_pos']); ?></td>
-                    <td><?php echo htmlspecialchars($row['email_kantor']); ?></td>
-                    <td><?php echo htmlspecialchars($row['fax_kantor']); ?></td>
-                    <td>
-                    <a href="Delete.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a>
-                    <button class="btn btn-danger btn-sm" onclick="window.location.href='detail.php'">Detail</button>
+            <div class="row">
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<div class='col-md-12 mb-4'>";  
+                        echo "<div class='card' style='width: 100%;'>";  
+                        echo "<div class='card-body row'>";
 
-                    </td> <!-- Aksi Column Buttons -->
-                </tr>
-            <?php } 
-        } else { ?>
-            <tr>
-                <td colspan="17" class="text-center">Tidak ada data peserta</td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
+                        // Left side - Main details (wider column)
+                        echo "<div class='col-md-6 mb-3'>"; 
+                        echo "<h5 class='card-title'>{$row['nama_lengkap']}</h5>";
+                        echo "<p class='card-text'><strong>No. KTP/NIK/Paspor:</strong> {$row['no_ktp_nik_paspor']}</p>";
+                        echo "<p class='card-text'><strong>Tempat Lahir:</strong> {$row['tempat_lahir']}</p>";
+                        echo "<p class='card-text'><strong>Tanggal Lahir:</strong> {$row['tanggal_lahir']}</p>";
+                        echo "<p class='card-text'><strong>Jenis Kelamin:</strong> {$row['jenis_kelamin']}</p>";
+                        echo "<p class='card-text'><strong>Kebangsaan:</strong> {$row['kebangsaan']}</p>";
+                        echo "<p class='card-text'><strong>Alamat Rumah:</strong> {$row['alamat_rumah']}</p>";
+                        echo "<p class='card-text'><strong>Email:</strong> {$row['email']}</p>";
+                        echo "<p class='card-text'><strong>Kualifikasi Pendidikan:</strong> {$row['kualifikasi_pendidikan']}</p>";
+                        echo "<p class='card-text'><strong>Institusi:</strong> {$row['nama_institusi']}</p>";
+                        echo "<p class='card-text'><strong>Jabatan:</strong> {$row['jabatan']}</p>";
+                        echo "<p class='card-text'><strong>Alamat Kantor:</strong> {$row['alamat_kantor']}</p>";
+                        echo "<p class='card-text'><strong>Kode Pos:</strong> {$row['kode_pos']}</p>";
+                        echo "<p class='card-text'><strong>Fax Kantor:</strong> {$row['fax_kantor']}</p>";
+                        echo "</div>"; // Close col-md-6 (left side)
+
+                        // Right side - Form (wider column)
+                        echo "<div class='col-md-6 mb-3'>";  
+                        echo "<div class='card'>";
+                        echo "<div class='card-body'>";
+                        echo "<h5 class='card-title'>Form Pengiriman</h5>";
+
+                        // Form - Email, Description, and Kirim Button
+                        echo "<form action='#' method='POST'>";
+                        echo "<div class='mb-3'>";
+                        echo "<label for='email' class='form-label'>Email</label>";
+                        echo "<input type='email' class='form-control' id='email' name='email' placeholder='Enter your email' required>";
+                        echo "</div>";
+                        echo "<div class='mb-3'>";
+                        echo "<label for='description' class='form-label'>Deskripsi</label>";
+                        echo "<textarea class='form-control' id='description' name='description' rows='3' placeholder='Tulis deskripsi...'></textarea>";
+                        echo "</div>";
+                        echo "<div class='mb-3'>";
+                        echo "<label for='file' class='form-label'>Upload File (PDF)</label>";
+                        echo "<input type='file' class='form-control' id='file' name='file' accept='.pdf' required>";
+                        echo "</div>";
+                        
+                        echo "<button type='submit' class='btn btn-primary'>Kirim</button>";
+                        echo "</form>";
+                        echo "</form>";
+
+                        echo "</div>"; // Close card-body
+                        echo "</div>"; // Close card
+                        echo "</div>"; // Close col-md-6
+                        
+                        echo "</div>"; // Close card-body
+                        echo "</div>"; // Close card
+                        echo "</div>"; // Close col-md-12
+                        $no++;
+                    }
+                } else {
+                    echo "<p class='col-12'>Tidak ada data peserta</p>";
+                }
+                ?>
+            </div> <!-- Close row -->
+        </div> <!-- Close container-fluid -->
+    </main>
+</div>
+
+</div>
 
                     </div>
                 </div>
