@@ -168,7 +168,7 @@ $result = mysqli_query($db, $query);
                             <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
                             Data Asesor
                         </a>
-                        <a class="nav-link" href="peserta_terdaftar.php">
+                        <a class="nav-link" href="peserta.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Data Peserta Terdaftar
                         </a>

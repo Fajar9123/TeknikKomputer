@@ -34,13 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Query untuk memasukkan data ke tabel peserta
     $query = "INSERT INTO peserta (nama_lengkap, no_ktp_nik_paspor, tempat_lahir, tanggal_lahir, jenis_kelamin, kebangsaan, alamat_rumah, email, kualifikasi_pendidikan, nama_institusi, jabatan, alamat_kantor, kode_pos, email_kantor, fax_kantor) 
               VALUES ('$nama_lengkap', '$no_ktp_nik_paspor', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$kebangsaan', '$alamat_rumah', '$email', '$kualifikasi_pendidikan', '$nama_institusi', '$jabatan', '$alamat_kantor', '$kode_pos', '$email_kantor', '$fax_kantor')";
-
-    // Memeriksa apakah query berhasil
-    if (mysqli_query($db, $query)) {
-        echo "Pendaftaran berhasil!";
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($db);
-    }
+// Memeriksa apakah query berhasil
+if (mysqli_query($db, $query)) {
+    // Mengarahkan ke halaman daftar.php setelah berhasil
+    header("Location: daftar.php");
+    exit;
+} else {
+    echo "Error: " . $query . "<br>" . mysqli_error($db);
+}
 }
 
 // Menutup koneksi

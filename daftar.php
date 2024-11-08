@@ -306,13 +306,13 @@ include 'koneksidaftar.php';
     </div>
 
     <p class="text-muted">* Pastikan semua informasi yang diisi adalah benar.</p>
-    <button type="submit" class="btn-primary my-5">Selanjutnya</button>
+    <button type="submit" class="btn-primary my-5">Kirim</button>
 </form>
 
         </div>
       </main>
 
-      <script>
+      <!-- <script>
         // JavaScript to load the next form
         function loadNextForm() {
           const formContainer = document.getElementById('form-container');
@@ -568,7 +568,7 @@ include 'koneksidaftar.php';
           });
         }
       </script>
-    </body>
+    </body> -->
 
 </html>
 </main>
